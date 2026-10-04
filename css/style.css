@@ -1,10 +1,10 @@
 :root {
   color-scheme: dark;
-  --night: #050615;
-  --red: #ff3158;
-  --blue: #22b8ff;
-  --violet: #7c3cff;
-  --gold: #ffd84d;
+  --midnight: #050814;
+  --navy: #0a1024;
+  --blue: #278cff;
+  --violet: #7857ff;
+  --red: #e83d61;
 }
 
 *,
@@ -24,7 +24,7 @@ body {
   min-height: 100vh;
   min-height: 100svh;
   overflow: hidden;
-  background: var(--night);
+  background: var(--midnight);
 }
 
 .universe {
@@ -35,226 +35,95 @@ body {
   min-height: 100svh;
   overflow: hidden;
   background:
-    radial-gradient(circle at 50% 48%, rgba(31, 28, 93, 0.72), transparent 27%),
-    radial-gradient(circle at 50% 125%, #172d67 0, #090d29 36%, transparent 65%),
-    linear-gradient(135deg, #03040e 0%, #0b0d26 48%, #050510 100%);
+    radial-gradient(circle at 18% 18%, rgba(39, 140, 255, 0.16), transparent 32%),
+    radial-gradient(circle at 82% 74%, rgba(120, 87, 255, 0.13), transparent 34%),
+    linear-gradient(145deg, var(--midnight) 0%, var(--navy) 48%, #080a19 100%);
 }
 
 .universe::before {
   position: absolute;
   z-index: 1;
-  inset: -50%;
+  inset: 0;
   content: "";
-  background: conic-gradient(
-    from 25deg at 50% 50%,
-    transparent 0deg,
-    rgba(255, 49, 88, 0.12) 42deg,
-    transparent 83deg,
-    rgba(34, 184, 255, 0.13) 155deg,
-    transparent 215deg,
-    rgba(124, 60, 255, 0.13) 285deg,
-    transparent 360deg
-  );
-  filter: blur(40px);
-  animation: cosmic-spin 24s linear infinite;
+  background:
+    linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.025) 45%, transparent 70%),
+    radial-gradient(ellipse at 50% -20%, rgba(39, 140, 255, 0.12), transparent 58%);
 }
 
 .universe::after {
   position: absolute;
-  z-index: 7;
+  z-index: 6;
   inset: 0;
   pointer-events: none;
   content: "";
-  opacity: 0.16;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+  opacity: 0.1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
   mix-blend-mode: soft-light;
 }
 
 .aurora {
   position: absolute;
   z-index: 2;
-  inset: -30%;
+  inset: -25%;
+  opacity: 0.65;
   background:
-    radial-gradient(ellipse at 30% 35%, rgba(255, 36, 98, 0.5), transparent 28%),
-    radial-gradient(ellipse at 70% 35%, rgba(0, 192, 255, 0.48), transparent 29%),
-    radial-gradient(ellipse at 50% 63%, rgba(119, 45, 255, 0.5), transparent 30%);
-  filter: blur(70px) saturate(150%);
-  animation: aurora-drift 10s ease-in-out infinite alternate, color-flash 5s ease-in-out infinite;
+    radial-gradient(ellipse at 24% 40%, rgba(232, 61, 97, 0.17), transparent 32%),
+    radial-gradient(ellipse at 72% 36%, rgba(39, 140, 255, 0.2), transparent 34%),
+    radial-gradient(ellipse at 54% 72%, rgba(120, 87, 255, 0.16), transparent 31%);
+  filter: blur(80px);
+  animation: ambient-shift 16s ease-in-out infinite alternate;
 }
 
-.energy {
+.pokeball-pattern {
   position: absolute;
   z-index: 3;
-  width: min(72vw, 850px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  opacity: 0.4;
-  filter: blur(8px);
-  mix-blend-mode: screen;
+  inset: -90px;
+  opacity: 0.22;
+  background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%238aa0ca' stroke-width='1.4' opacity='.7'%3E%3Ccircle cx='45' cy='45' r='23'/%3E%3Cpath d='M22 45h46'/%3E%3Ccircle cx='45' cy='45' r='7' fill='%23080d20'/%3E%3Ccircle cx='135' cy='135' r='23'/%3E%3Cpath d='M112 135h46'/%3E%3Ccircle cx='135' cy='135' r='7' fill='%23080d20'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  transform: rotate(-7deg) scale(1.08);
+  mask-image: radial-gradient(ellipse at center, #000 12%, rgba(0, 0, 0, 0.75) 58%, transparent 96%);
+  animation: pattern-drift 42s linear infinite;
 }
 
-.energy::before,
-.energy::after {
+.pokeball-pattern::after {
   position: absolute;
-  inset: 12%;
-  border: 1px solid currentColor;
-  border-radius: inherit;
+  inset: 0;
   content: "";
-  opacity: 0.4;
-  box-shadow: 0 0 35px currentColor, inset 0 0 35px currentColor;
-}
-
-.energy::after {
-  inset: 28%;
-}
-
-.energy--red {
-  top: -34%;
-  left: -22%;
-  color: var(--red);
-  background: radial-gradient(circle, rgba(255, 49, 88, 0.45), transparent 63%);
-  animation: orbit-red 13s ease-in-out infinite alternate;
-}
-
-.energy--blue {
-  right: -24%;
-  bottom: -35%;
-  color: var(--blue);
-  background: radial-gradient(circle, rgba(34, 184, 255, 0.42), transparent 63%);
-  animation: orbit-blue 15s ease-in-out infinite alternate;
-}
-
-.energy--gold {
-  top: 33%;
-  left: 41%;
-  width: min(18vw, 220px);
-  color: var(--gold);
-  background: radial-gradient(circle, rgba(255, 216, 77, 0.12), transparent 68%);
-  animation: gold-pulse 6s ease-in-out infinite;
-}
-
-.stars {
-  position: absolute;
-  z-index: 4;
-  inset: -10%;
-  background-image:
-    radial-gradient(circle, rgba(255, 255, 255, 0.95) 0 1px, transparent 1.5px),
-    radial-gradient(circle, rgba(95, 210, 255, 0.8) 0 1px, transparent 1.7px),
-    radial-gradient(circle, rgba(255, 132, 160, 0.75) 0 1px, transparent 1.6px);
-  background-position: 17px 29px, 83px 113px, 149px 61px;
-  background-size: 173px 173px, 227px 227px, 293px 293px;
-}
-
-.stars--far {
-  opacity: 0.38;
-  filter: blur(0.4px);
-  animation: stars-far-drift 34s linear infinite;
-}
-
-.stars--near {
-  opacity: 0.68;
-  animation: stars-near-drift 19s linear infinite;
-}
-
-.horizon {
-  position: absolute;
-  z-index: 4;
-  right: -20%;
-  bottom: -48%;
-  left: -20%;
-  height: 70%;
-  border: 1px solid rgba(104, 189, 255, 0.2);
-  border-radius: 50% 50% 0 0;
-  background:
-    linear-gradient(rgba(94, 134, 255, 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(94, 134, 255, 0.12) 1px, transparent 1px);
-  background-size: 55px 55px;
-  box-shadow: 0 -18px 80px rgba(78, 65, 255, 0.25);
-  transform: perspective(450px) rotateX(58deg);
-  mask-image: linear-gradient(to bottom, transparent, #000 45%);
-}
-
-.pokeball-mark {
-  position: absolute;
-  z-index: 5;
-  top: 50%;
-  left: 50%;
-  width: clamp(140px, 20vw, 300px);
-  aspect-ratio: 1;
-  border: 2px solid rgba(255, 255, 255, 0.12);
-  border-radius: 50%;
-  opacity: 0.46;
-  background:
-    linear-gradient(to bottom, transparent 46.5%, rgba(255, 255, 255, 0.15) 46.5% 53.5%, transparent 53.5%);
-  box-shadow: 0 0 30px rgba(116, 89, 255, 0.14);
-  transform: translate(-50%, -50%) rotate(-8deg);
-}
-
-.pokeball-mark span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 24%;
-  aspect-ratio: 1;
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  background: #0b0d26;
-  box-shadow: 0 0 14px rgba(108, 211, 255, 0.28);
-  transform: translate(-50%, -50%);
-}
-
-.pokeball-mark span::after {
-  position: absolute;
-  inset: 27%;
-  border-radius: inherit;
-  content: "";
-  background: #dff8ff;
-  box-shadow: 0 0 14px rgba(34, 184, 255, 0.65);
+  background: linear-gradient(120deg, transparent 28%, rgba(39, 140, 255, 0.12) 49%, transparent 70%);
+  animation: sheen 12s ease-in-out infinite;
 }
 
 .vignette {
   position: absolute;
-  z-index: 6;
+  z-index: 5;
   inset: 0;
-  background: radial-gradient(circle, transparent 36%, rgba(2, 3, 12, 0.34) 69%, rgba(1, 2, 9, 0.9) 110%);
   pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(2, 4, 12, 0.24), transparent 22%, transparent 78%, rgba(2, 4, 12, 0.38)),
+    radial-gradient(ellipse at center, transparent 42%, rgba(2, 4, 12, 0.52) 110%);
 }
 
-@keyframes cosmic-spin {
-  to { transform: rotate(360deg); }
+@keyframes ambient-shift {
+  from { transform: translate3d(-2%, -1%, 0) scale(1); }
+  to { transform: translate3d(3%, 2%, 0) scale(1.06); }
 }
 
-@keyframes aurora-drift {
-  0% { transform: translate3d(-3%, -2%, 0) rotate(-4deg) scale(1); }
-  100% { transform: translate3d(4%, 3%, 0) rotate(5deg) scale(1.12); }
+@keyframes pattern-drift {
+  from { background-position: 0 0; }
+  to { background-position: 180px -180px; }
 }
 
-@keyframes color-flash {
-  0%, 100% { opacity: 0.7; filter: blur(70px) saturate(145%) hue-rotate(0deg); }
-  50% { opacity: 1; filter: blur(58px) saturate(190%) hue-rotate(24deg); }
+@keyframes sheen {
+  0%, 100% { opacity: 0.2; transform: translateX(-12%); }
+  50% { opacity: 0.62; transform: translateX(12%); }
 }
 
-@keyframes orbit-red {
-  to { transform: translate(18vw, 15vh) scale(1.15); opacity: 0.62; }
-}
-
-@keyframes orbit-blue {
-  to { transform: translate(-16vw, -13vh) scale(1.18); opacity: 0.64; }
-}
-
-@keyframes gold-pulse {
-  0%, 100% { opacity: 0.2; transform: scale(0.8); }
-  50% { opacity: 0.58; transform: scale(1.35); }
-}
-
-@keyframes stars-near-drift {
-  from { transform: translate3d(-3%, 4%, 0) rotate(-0.5deg); }
-  to { transform: translate3d(5%, -6%, 0) rotate(1.5deg); }
-}
-
-@keyframes stars-far-drift {
-  from { transform: translate3d(4%, -5%, 0) scale(0.88) rotate(1deg); }
-  to { transform: translate3d(-7%, 3%, 0) scale(0.96) rotate(-2deg); }
+@media (max-width: 600px) {
+  .pokeball-pattern {
+    opacity: 0.18;
+    background-size: 140px 140px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
