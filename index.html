@@ -14,25 +14,93 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <main class="universe" aria-label="PokéVerse">
-      <div class="aurora" aria-hidden="true"></div>
-      <div class="pokeball-pattern" aria-hidden="true"></div>
-      <section class="hero-copy" aria-labelledby="hero-title">
-        <h1 id="hero-title">PokéVerse</h1>
-        <p class="hero-tagline">Every region. Every legend. One universe.</p>
+    <main class="site-shell" aria-label="PokéVerse">
+      <section class="universe" aria-labelledby="hero-title">
+        <div class="aurora" aria-hidden="true"></div>
+        <div class="pokeball-pattern" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <h1 id="hero-title">PokéVerse</h1>
+          <p class="hero-tagline">Every region. Every legend. One universe.</p>
+        </div>
+        <div class="scroll-cue" aria-label="Scroll to start your journey">
+          <span class="scroll-label">Scroll to start your journey</span>
+          <span class="mouse-icon" aria-hidden="true"><i></i></span>
+        </div>
+        <div class="ash-entrance">
+          <div
+            class="ash-greeting"
+            role="img"
+            aria-label="Ash Ketchum waves hello, then strikes a confident pose"
+          ></div>
+        </div>
+        <div class="vignette" aria-hidden="true"></div>
       </section>
-      <div class="scroll-cue" aria-label="Scroll to start your journey">
-        <span>Scroll to start your journey</span>
-        <span class="mouse-icon" aria-hidden="true"><i></i></span>
+
+      <div class="journey-gate" aria-hidden="true">
+        <span class="gate-line gate-line--left"></span>
+        <span class="gate-ball"><i></i></span>
+        <span class="gate-line gate-line--right"></span>
       </div>
-      <div class="ash-entrance">
-        <div
-          class="ash-greeting"
-          role="img"
-          aria-label="Ash Ketchum waves hello, then strikes a confident pose"
-        ></div>
-      </div>
-      <div class="vignette" aria-hidden="true"></div>
+
+      <section class="trainer-setup" id="trainer-setup" aria-labelledby="setup-title">
+        <div class="setup-pattern" aria-hidden="true"></div>
+        <div class="setup-glow setup-glow--red" aria-hidden="true"></div>
+        <div class="setup-glow setup-glow--blue" aria-hidden="true"></div>
+
+        <div class="setup-card">
+          <header class="setup-header">
+            <span class="setup-kicker"><i class="mini-ball" aria-hidden="true"></i> Trainer registration</span>
+            <h2 id="setup-title">Your journey starts here</h2>
+            <p>Every great adventure begins with a name and a trainer identity.</p>
+          </header>
+
+          <form class="trainer-form" id="trainer-form">
+            <label class="name-field" for="trainer-name">
+              <span>What should we call you?</span>
+              <span class="input-shell">
+                <input
+                  id="trainer-name"
+                  name="trainerName"
+                  type="text"
+                  maxlength="18"
+                  autocomplete="nickname"
+                  placeholder="Enter trainer name"
+                  required
+                />
+                <i aria-hidden="true">ID</i>
+              </span>
+            </label>
+
+            <fieldset class="avatar-picker">
+              <legend>Choose your trainer avatar</legend>
+              <div class="avatar-grid">
+                <button class="avatar-card" type="button" data-avatar="Trailblazer" aria-pressed="false">
+                  <span class="avatar-portrait avatar-portrait--red" aria-hidden="true"><i class="avatar-body"></i><i class="avatar-head"></i><i class="avatar-hair"></i><i class="avatar-cap"></i></span>
+                  <span class="avatar-name">Trailblazer</span><span class="avatar-type">Fire spirit</span>
+                </button>
+                <button class="avatar-card" type="button" data-avatar="Pathfinder" aria-pressed="false">
+                  <span class="avatar-portrait avatar-portrait--green" aria-hidden="true"><i class="avatar-body"></i><i class="avatar-head"></i><i class="avatar-hair"></i><i class="avatar-cap"></i></span>
+                  <span class="avatar-name">Pathfinder</span><span class="avatar-type">Grass spirit</span>
+                </button>
+                <button class="avatar-card" type="button" data-avatar="Wave Rider" aria-pressed="false">
+                  <span class="avatar-portrait avatar-portrait--blue" aria-hidden="true"><i class="avatar-body"></i><i class="avatar-head"></i><i class="avatar-hair"></i><i class="avatar-cap"></i></span>
+                  <span class="avatar-name">Wave Rider</span><span class="avatar-type">Water spirit</span>
+                </button>
+                <button class="avatar-card" type="button" data-avatar="Night Scout" aria-pressed="false">
+                  <span class="avatar-portrait avatar-portrait--violet" aria-hidden="true"><i class="avatar-body"></i><i class="avatar-head"></i><i class="avatar-hair"></i><i class="avatar-cap"></i></span>
+                  <span class="avatar-name">Night Scout</span><span class="avatar-type">Psychic spirit</span>
+                </button>
+              </div>
+            </fieldset>
+
+            <button class="journey-button" type="submit" disabled>
+              <span>Begin my journey</span><i class="button-ball" aria-hidden="true"></i>
+            </button>
+            <p class="trainer-welcome" id="trainer-welcome" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
     </main>
+    <script src="js/app.js"></script>
   </body>
 </html>
