@@ -113,26 +113,6 @@ body {
   animation: hero-reveal 900ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
 }
 
-.hero-kicker {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0 0 8px;
-  color: #8ebcff;
-  font: 700 clamp(0.7rem, 1vw, 0.85rem) / 1.2 "Oxanium", system-ui, sans-serif;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-}
-
-.hero-kicker::before {
-  width: 28px;
-  height: 2px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--red), var(--blue));
-  content: "";
-  box-shadow: 0 0 12px rgba(39, 140, 255, 0.5);
-}
-
 .hero-copy h1 {
   margin: 0;
   color: #ffcb24;
@@ -146,11 +126,49 @@ body {
 }
 
 .hero-tagline {
-  margin: clamp(14px, 2vw, 22px) 0 0 3px;
+  margin: clamp(32px, 4vw, 56px) 0 0 3px;
   color: rgba(220, 229, 250, 0.72);
   font: 600 clamp(0.82rem, 1.35vw, 1.08rem) / 1.5 "Oxanium", system-ui, sans-serif;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.scroll-cue {
+  position: absolute;
+  z-index: 8;
+  bottom: clamp(16px, 3vh, 30px);
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  color: rgba(224, 233, 255, 0.82);
+  font: 600 clamp(0.62rem, 0.8vw, 0.75rem) / 1.2 "Oxanium", system-ui, sans-serif;
+  letter-spacing: 0.13em;
+  text-align: center;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  animation: scroll-cue-blink 1s ease-in-out infinite;
+}
+
+.mouse-icon {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 28px;
+  border: 1.5px solid currentColor;
+  border-radius: 10px;
+}
+
+.mouse-icon i {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  width: 2px;
+  height: 6px;
+  border-radius: 999px;
+  background: currentColor;
+  transform: translateX(-50%);
 }
 
 .ash-entrance {
@@ -229,6 +247,11 @@ body {
   to { opacity: 1; transform: translate3d(0, -50%, 0); }
 }
 
+@keyframes scroll-cue-blink {
+  0%, 100% { opacity: 0.34; }
+  50% { opacity: 1; }
+}
+
 @media (max-width: 600px) {
   .pokeball-pattern {
     opacity: 0.18;
@@ -255,6 +278,12 @@ body {
     max-width: 19rem;
     font-size: 0.68rem;
     line-height: 1.6;
+  }
+
+  .scroll-cue {
+    bottom: 14px;
+    max-width: 48vw;
+    font-size: 0.58rem;
   }
 
   @keyframes hero-reveal {
