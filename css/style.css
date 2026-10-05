@@ -210,52 +210,17 @@ body {
 }
 
 .ash-greeting {
-  position: relative;
   width: 100%;
   height: 100%;
-  transform-origin: 50% 100%;
-  will-change: transform;
-  animation: ash-wave-motion 2.75s cubic-bezier(0.45, 0, 0.2, 1) 250ms both;
-}
-
-.ash-frame {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
   background-image: url("../images/ash-wave-strip.png");
   background-repeat: no-repeat;
-  background-size: 600% 100%;
-  will-change: opacity;
-  animation-duration: 2.4s;
-  animation-delay: 350ms;
-  animation-timing-function: ease-in-out;
-  animation-fill-mode: forwards;
-}
-
-.ash-frame--1 {
-  opacity: 1;
   background-position: 0 0;
-  animation-name: ash-frame-one;
-}
-
-.ash-frame--2 {
-  background-position: 20% 0;
-  animation-name: ash-frame-two;
-}
-
-.ash-frame--3 {
-  background-position: 40% 0;
-  animation-name: ash-frame-three;
-}
-
-.ash-frame--4 {
-  background-position: 60% 0;
-  animation-name: ash-frame-four;
-}
-
-.ash-frame--final {
-  background-position: 100% 0;
-  animation-name: ash-frame-final;
+  background-size: 600% 100%;
+  transform-origin: 50% 100%;
+  will-change: background-position, transform;
+  animation:
+    ash-wave 1.8s step-end 350ms forwards,
+    ash-wave-motion 2.25s cubic-bezier(0.45, 0, 0.2, 1) 250ms both;
 }
 
 .vignette {
@@ -289,41 +254,27 @@ body {
   to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
 
-@keyframes ash-frame-one {
-  0%, 18% { opacity: 1; }
-  27%, 100% { opacity: 0; }
-}
-
-@keyframes ash-frame-two {
-  0%, 13% { opacity: 0; }
-  22%, 34% { opacity: 1; }
-  43%, 100% { opacity: 0; }
-}
-
-@keyframes ash-frame-three {
-  0%, 29% { opacity: 0; }
-  38%, 50% { opacity: 1; }
-  59%, 63% { opacity: 0; }
-  71%, 81% { opacity: 1; }
-  89%, 100% { opacity: 0; }
-}
-
-@keyframes ash-frame-four {
-  0%, 45% { opacity: 0; }
-  54%, 66% { opacity: 1; }
-  75%, 100% { opacity: 0; }
-}
-
-@keyframes ash-frame-final {
-  0%, 80% { opacity: 0; }
-  91%, 100% { opacity: 1; }
+@keyframes ash-wave {
+  0%, 7% { background-position: 0 0; }
+  8%, 15% { background-position: 20% 0; }
+  16%, 23% { background-position: 40% 0; }
+  24%, 31% { background-position: 60% 0; }
+  32%, 39% { background-position: 40% 0; }
+  40%, 47% { background-position: 20% 0; }
+  48%, 55% { background-position: 0 0; }
+  56%, 63% { background-position: 20% 0; }
+  64%, 71% { background-position: 40% 0; }
+  72%, 79% { background-position: 60% 0; }
+  80%, 87% { background-position: 40% 0; }
+  88%, 94% { background-position: 20% 0; }
+  95%, 100% { background-position: 100% 0; }
 }
 
 @keyframes ash-wave-motion {
-  0% { transform: translateY(5px) rotate(-1.5deg); }
-  28% { transform: translateY(-2px) rotate(0.8deg); }
-  58% { transform: translateY(0) rotate(-0.5deg); }
-  82% { transform: translateY(-1px) rotate(0.25deg); }
+  0% { transform: translateY(2px) rotate(-0.35deg); }
+  30% { transform: translateY(-1px) rotate(0.25deg); }
+  62% { transform: translateY(0) rotate(-0.2deg); }
+  84% { transform: translateY(-0.5px) rotate(0.1deg); }
   100% { transform: translateY(0) rotate(0); }
 }
 
