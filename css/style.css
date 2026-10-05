@@ -94,6 +94,60 @@ body {
   animation: sheen 12s ease-in-out infinite;
 }
 
+.hero-copy {
+  position: absolute;
+  z-index: 7;
+  top: 46%;
+  left: clamp(24px, 7vw, 110px);
+  width: min(62vw, 850px);
+  color: #f6f8ff;
+  transform: translateY(-50%);
+  animation: hero-reveal 900ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
+}
+
+.hero-kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 8px;
+  color: #8ebcff;
+  font: 700 clamp(0.7rem, 1vw, 0.85rem) / 1.2 system-ui, sans-serif;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.hero-kicker::before {
+  width: 28px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--red), var(--blue));
+  content: "";
+  box-shadow: 0 0 12px rgba(39, 140, 255, 0.5);
+}
+
+.hero-copy h1 {
+  margin: 0;
+  color: #dfe8ff;
+  font: 900 clamp(3.5rem, 8.5vw, 8rem) / 0.92 system-ui, -apple-system, "Segoe UI", sans-serif;
+  letter-spacing: -0.075em;
+  text-shadow: 0 12px 38px rgba(0, 0, 0, 0.34);
+}
+
+.hero-copy h1 span {
+  color: #fff;
+  text-shadow:
+    0 0 30px rgba(39, 140, 255, 0.24),
+    0 12px 38px rgba(0, 0, 0, 0.34);
+}
+
+.hero-tagline {
+  margin: clamp(14px, 2vw, 22px) 0 0 3px;
+  color: rgba(220, 229, 250, 0.72);
+  font: 500 clamp(0.82rem, 1.35vw, 1.08rem) / 1.5 system-ui, sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .ash-entrance {
   position: absolute;
   z-index: 4;
@@ -165,6 +219,11 @@ body {
   100% { transform: translateY(0) rotate(0); }
 }
 
+@keyframes hero-reveal {
+  from { opacity: 0; transform: translate3d(-24px, -46%, 0); }
+  to { opacity: 1; transform: translate3d(0, -50%, 0); }
+}
+
 @media (max-width: 600px) {
   .pokeball-pattern {
     opacity: 0.18;
@@ -174,6 +233,28 @@ body {
   .ash-entrance {
     right: 4px;
     width: clamp(160px, 48vw, 230px);
+  }
+
+  .hero-copy {
+    top: 12%;
+    left: 22px;
+    width: calc(100% - 44px);
+    transform: none;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(3.4rem, 17vw, 5.6rem);
+  }
+
+  .hero-tagline {
+    max-width: 19rem;
+    font-size: 0.68rem;
+    line-height: 1.6;
+  }
+
+  @keyframes hero-reveal {
+    from { opacity: 0; transform: translate3d(-20px, 0, 0); }
+    to { opacity: 1; transform: translate3d(0, 0, 0); }
   }
 }
 
