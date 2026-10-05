@@ -161,37 +161,37 @@ body {
 .mouse-icon {
   position: relative;
   display: block;
-  width: 20px;
-  height: 32px;
-  border: 2px solid rgba(190, 216, 255, 0.9);
-  border-radius: 12px;
-  background: linear-gradient(180deg, rgba(53, 118, 211, 0.12), rgba(8, 14, 35, 0.2));
+  width: 22px;
+  height: 36px;
+  border: 1.5px solid rgba(218, 230, 255, 0.82);
+  border-radius: 13px;
+  background: rgba(11, 20, 46, 0.38);
   box-shadow:
-    0 0 16px rgba(39, 140, 255, 0.22),
-    inset 0 0 9px rgba(124, 175, 255, 0.08);
+    0 4px 14px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.035);
 }
 
 .mouse-icon i {
   position: absolute;
-  top: 6px;
+  top: 7px;
   left: 50%;
-  width: 2px;
-  height: 7px;
+  width: 3px;
+  height: 6px;
   border-radius: 999px;
-  background: currentColor;
+  background: rgba(225, 235, 255, 0.94);
   transform: translateX(-50%);
-  box-shadow: 0 0 7px rgba(142, 188, 255, 0.65);
-  animation: mouse-wheel 1.25s ease-in-out infinite;
+  box-shadow: 0 0 6px rgba(118, 169, 255, 0.35);
+  animation: mouse-wheel 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .mouse-icon::after {
   position: absolute;
-  bottom: -8px;
+  bottom: -9px;
   left: 50%;
-  width: 5px;
-  height: 5px;
-  border-right: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid rgba(218, 230, 255, 0.75);
+  border-bottom: 1.5px solid rgba(218, 230, 255, 0.75);
   content: "";
   transform: translateX(-50%) rotate(45deg);
 }
@@ -286,10 +286,10 @@ body {
 }
 
 @keyframes mouse-wheel {
-  0% { opacity: 0; transform: translate(-50%, -1px); }
-  28% { opacity: 1; }
-  75% { opacity: 0.9; }
-  100% { opacity: 0; transform: translate(-50%, 8px); }
+  0% { opacity: 0; transform: translate(-50%, 0); }
+  20% { opacity: 1; }
+  65% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, 9px); }
 }
 
 @media (max-width: 600px) {
