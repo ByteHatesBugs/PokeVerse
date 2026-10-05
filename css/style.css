@@ -111,7 +111,7 @@ body {
   gap: 12px;
   margin: 0 0 8px;
   color: #8ebcff;
-  font: 700 clamp(0.7rem, 1vw, 0.85rem) / 1.2 system-ui, sans-serif;
+  font: 700 clamp(0.7rem, 1vw, 0.85rem) / 1.2 "Oxanium", system-ui, sans-serif;
   letter-spacing: 0.24em;
   text-transform: uppercase;
 }
@@ -128,8 +128,8 @@ body {
 .hero-copy h1 {
   margin: 0;
   color: #dfe8ff;
-  font: 900 clamp(3.5rem, 8.5vw, 8rem) / 0.92 system-ui, -apple-system, "Segoe UI", sans-serif;
-  letter-spacing: -0.075em;
+  font: 400 clamp(3.5rem, 8.5vw, 8rem) / 0.92 "Russo One", "Arial Black", sans-serif;
+  letter-spacing: -0.045em;
   text-shadow: 0 12px 38px rgba(0, 0, 0, 0.34);
 }
 
@@ -143,7 +143,7 @@ body {
 .hero-tagline {
   margin: clamp(14px, 2vw, 22px) 0 0 3px;
   color: rgba(220, 229, 250, 0.72);
-  font: 500 clamp(0.82rem, 1.35vw, 1.08rem) / 1.5 system-ui, sans-serif;
+  font: 600 clamp(0.82rem, 1.35vw, 1.08rem) / 1.5 "Oxanium", system-ui, sans-serif;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
