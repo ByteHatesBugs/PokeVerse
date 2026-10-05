@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Pokemon Solid";
+  src: url("../fonts/pokemon-solid.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
   color-scheme: dark;
   --midnight: #050814;
@@ -127,17 +135,18 @@ body {
 
 .hero-copy h1 {
   margin: 0;
-  color: #dfe8ff;
-  font: 400 clamp(3.5rem, 8.5vw, 8rem) / 0.92 "Russo One", "Arial Black", sans-serif;
-  letter-spacing: -0.045em;
-  text-shadow: 0 12px 38px rgba(0, 0, 0, 0.34);
+  color: #ffcb24;
+  font: 400 clamp(3.5rem, 8.5vw, 8rem) / 1 "Pokemon Solid", "Arial Black", sans-serif;
+  letter-spacing: 0.025em;
+  -webkit-text-stroke: clamp(2px, 0.42vw, 6px) #2c57a5;
+  paint-order: stroke fill;
+  text-shadow:
+    0 clamp(4px, 0.55vw, 8px) 0 #163675,
+    0 14px 38px rgba(0, 0, 0, 0.4);
 }
 
 .hero-copy h1 span {
-  color: #fff;
-  text-shadow:
-    0 0 30px rgba(39, 140, 255, 0.24),
-    0 12px 38px rgba(0, 0, 0, 0.34);
+  color: inherit;
 }
 
 .hero-tagline {
