@@ -201,7 +201,7 @@ body {
   transform-origin: 50% 100%;
   will-change: background-position, transform;
   animation:
-    ash-wave 1.8s steps(5, end) 350ms forwards,
+    ash-wave 1.8s step-end 350ms forwards,
     ash-wave-motion 2.15s cubic-bezier(0.45, 0, 0.2, 1) 250ms both;
 }
 
@@ -237,8 +237,12 @@ body {
 }
 
 @keyframes ash-wave {
-  from { background-position: 0 0; }
-  to { background-position: 100% 0; }
+  0%, 16% { background-position: 0 0; }
+  17%, 33% { background-position: 20% 0; }
+  34%, 50% { background-position: 40% 0; }
+  51%, 67% { background-position: 60% 0; }
+  68%, 83% { background-position: 40% 0; }
+  84%, 100% { background-position: 100% 0; }
 }
 
 @keyframes ash-wave-motion {
