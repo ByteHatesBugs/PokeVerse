@@ -102,7 +102,9 @@ body {
   width: clamp(180px, 27vw, 360px);
   aspect-ratio: 1 / 2;
   filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.42));
-  animation: ash-arrive 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: 50% 100%;
+  will-change: opacity, transform;
+  animation: ash-arrive 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .ash-greeting {
@@ -112,7 +114,11 @@ body {
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: 600% 100%;
-  animation: ash-wave 3s steps(5, end) 450ms forwards;
+  transform-origin: 50% 100%;
+  will-change: background-position, transform;
+  animation:
+    ash-wave 1.8s steps(5, end) 350ms forwards,
+    ash-wave-motion 2.15s cubic-bezier(0.45, 0, 0.2, 1) 250ms both;
 }
 
 .vignette {
@@ -141,13 +147,22 @@ body {
 }
 
 @keyframes ash-arrive {
-  from { opacity: 0; transform: translate3d(32px, 18px, 0) scale(0.96); }
+  from { opacity: 0; transform: translate3d(44px, 24px, 0) scale(0.94); }
+  70% { opacity: 1; }
   to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
 
 @keyframes ash-wave {
   from { background-position: 0 0; }
   to { background-position: 100% 0; }
+}
+
+@keyframes ash-wave-motion {
+  0% { transform: translateY(5px) rotate(-1.5deg); }
+  28% { transform: translateY(-2px) rotate(0.8deg); }
+  58% { transform: translateY(0) rotate(-0.5deg); }
+  82% { transform: translateY(-1px) rotate(0.25deg); }
+  100% { transform: translateY(0) rotate(0); }
 }
 
 @media (max-width: 600px) {
