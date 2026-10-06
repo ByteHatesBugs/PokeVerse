@@ -1,4 +1,28 @@
 const revealTargets = document.querySelectorAll(".journey-gate, .trainer-setup");
+const heroSection = document.querySelector(".universe");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+let transitionFrame = 0;
+
+const updatePageTransition = () => {
+  const transitionDistance = Math.max(window.innerHeight * 0.72, 1);
+  const progress = Math.min(Math.max(window.scrollY / transitionDistance, 0), 1);
+  const opacity = Math.max(1 - progress * 1.12, 0);
+  const blur = reduceMotion.matches ? 0 : progress * 8;
+
+  heroSection.style.setProperty("--hero-opacity", opacity.toFixed(3));
+  heroSection.style.setProperty("--hero-blur", `${blur.toFixed(2)}px`);
+  transitionFrame = 0;
+};
+
+const requestPageTransition = () => {
+  if (transitionFrame) return;
+  transitionFrame = window.requestAnimationFrame(updatePageTransition);
+};
+
+window.addEventListener("scroll", requestPageTransition, { passive: true });
+window.addEventListener("resize", requestPageTransition);
+reduceMotion.addEventListener("change", requestPageTransition);
+updatePageTransition();
 
 const revealObserver = new IntersectionObserver(
   (entries) => {
