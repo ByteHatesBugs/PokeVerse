@@ -13,8 +13,8 @@ const startJourneyTransition = () => {
   transitionRunning = true;
   pageRoot.classList.add("is-transitioning");
   const coverDelay = reduceMotion.matches ? 0 : 460;
-  const revealDelay = reduceMotion.matches ? 0 : 610;
-  const finishDelay = reduceMotion.matches ? 0 : 1080;
+  const revealDelay = reduceMotion.matches ? 0 : 1040;
+  const finishDelay = reduceMotion.matches ? 0 : 1540;
 
   window.setTimeout(() => {
     journeyLocked = true;
