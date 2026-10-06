@@ -3,6 +3,7 @@ const heroSection = document.querySelector(".universe");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 let transitionFrame = 0;
 let journeyLocked = false;
+let flashTriggered = false;
 
 const updatePageTransition = () => {
   const transitionDistance = Math.max(window.innerHeight * 0.72, 1);
@@ -12,6 +13,11 @@ const updatePageTransition = () => {
 
   heroSection.style.setProperty("--hero-opacity", opacity.toFixed(3));
   heroSection.style.setProperty("--hero-blur", `${blur.toFixed(2)}px`);
+
+  if (!flashTriggered && window.scrollY > 8) {
+    flashTriggered = true;
+    document.documentElement.classList.add("transition-flash");
+  }
 
   if (!journeyLocked && window.scrollY >= heroSection.offsetHeight - 4) {
     journeyLocked = true;
