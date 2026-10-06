@@ -13,6 +13,10 @@
   --blue: #278cff;
   --violet: #7857ff;
   --red: #e83d61;
+  --page-background:
+    radial-gradient(circle at 18% 18%, rgba(39, 140, 255, 0.16), transparent 32%),
+    radial-gradient(circle at 82% 74%, rgba(120, 87, 255, 0.13), transparent 34%),
+    linear-gradient(145deg, var(--midnight) 0%, var(--navy) 48%, #080a19 100%);
 }
 
 *,
@@ -41,7 +45,7 @@ body {
   min-height: 100vh;
   min-height: 100svh;
   overflow-x: hidden;
-  background: var(--midnight);
+  background: var(--page-background);
   color: #f5f8ff;
   font-family: "Oxanium", system-ui, sans-serif;
 }
@@ -62,10 +66,7 @@ body {
   min-height: 100svh;
   overflow: hidden;
   opacity: var(--hero-opacity, 1);
-  background:
-    radial-gradient(circle at 18% 18%, rgba(39, 140, 255, 0.16), transparent 32%),
-    radial-gradient(circle at 82% 74%, rgba(120, 87, 255, 0.13), transparent 34%),
-    linear-gradient(145deg, var(--midnight) 0%, var(--navy) 48%, #080a19 100%);
+  background: var(--page-background);
   filter: blur(var(--hero-blur, 0));
   scroll-snap-align: start;
   scroll-snap-stop: always;
@@ -383,10 +384,7 @@ html.is-transitioning body {
   padding: clamp(72px, 9vw, 120px) clamp(18px, 5vw, 72px);
   overflow: hidden;
   opacity: 0.18;
-  background:
-    radial-gradient(circle at 15% 28%, rgba(232, 61, 97, 0.12), transparent 29%),
-    radial-gradient(circle at 88% 74%, rgba(39, 140, 255, 0.16), transparent 31%),
-    linear-gradient(145deg, #071426, #080d1d 52%, #0b1024);
+  background: var(--page-background);
   box-shadow: 0 -40px 90px rgba(2, 5, 15, 0.72);
   clip-path: inset(10% 0 0 round 40px 40px 0 0);
   scroll-snap-align: start;
@@ -407,37 +405,40 @@ html.is-transitioning body {
 
 .trainer-setup::before {
   position: absolute;
-  z-index: -2;
+  z-index: -3;
   inset: 0;
   content: "";
-  opacity: 0.14;
-  background-image:
-    linear-gradient(rgba(121, 158, 214, 0.18) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(121, 158, 214, 0.18) 1px, transparent 1px);
-  background-size: 42px 42px;
-  mask-image: radial-gradient(circle at center, #000 15%, transparent 78%);
+  background:
+    linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.025) 45%, transparent 70%),
+    radial-gradient(ellipse at 50% -20%, rgba(39, 140, 255, 0.12), transparent 58%);
 }
 
 .setup-pattern {
   position: absolute;
   z-index: -1;
-  inset: 0;
-  opacity: 0.12;
-  background-image: url("data:image/svg+xml,%3Csvg width='220' height='220' viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%237ba4e8' stroke-width='1.2'%3E%3Ccircle cx='35' cy='35' r='25'/%3E%3Cpath d='M10 35h50'/%3E%3Ccircle cx='35' cy='35' r='7'/%3E%3C/g%3E%3C/svg%3E");
+  inset: -90px;
+  opacity: 0.22;
+  background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%238aa0ca' stroke-width='1.4' opacity='.7'%3E%3Ccircle cx='45' cy='45' r='23'/%3E%3Cpath d='M22 45h46'/%3E%3Ccircle cx='45' cy='45' r='7' fill='%23080d20'/%3E%3Ccircle cx='135' cy='135' r='23'/%3E%3Cpath d='M112 135h46'/%3E%3Ccircle cx='135' cy='135' r='7' fill='%23080d20'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  transform: rotate(-7deg) scale(1.08);
+  mask-image: radial-gradient(ellipse at center, #000 12%, rgba(0, 0, 0, 0.75) 58%, transparent 96%);
+  animation: pattern-drift 42s linear infinite;
 }
 
 .setup-glow {
   position: absolute;
-  z-index: -1;
-  width: 34vw;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.12;
+  z-index: -2;
+  inset: -25%;
+  opacity: 0.65;
+  background:
+    radial-gradient(ellipse at 24% 40%, rgba(232, 61, 97, 0.17), transparent 32%),
+    radial-gradient(ellipse at 72% 36%, rgba(39, 140, 255, 0.2), transparent 34%),
+    radial-gradient(ellipse at 54% 72%, rgba(120, 87, 255, 0.16), transparent 31%);
+  filter: blur(80px);
+  animation: ambient-shift 16s ease-in-out infinite alternate;
 }
 
-.setup-glow--red { top: -14%; left: -12%; background: #ee4560; }
-.setup-glow--blue { right: -12%; bottom: -18%; background: #278cff; }
+.setup-glow--blue { display: none; }
 
 .setup-card {
   width: min(1080px, 100%);
@@ -676,7 +677,8 @@ html.is-transitioning body {
 }
 
 @media (max-width: 600px) {
-  .pokeball-pattern {
+  .pokeball-pattern,
+  .setup-pattern {
     opacity: 0.18;
     background-size: 140px 140px;
   }
