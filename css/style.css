@@ -46,24 +46,53 @@ body {
   font-family: "Oxanium", system-ui, sans-serif;
 }
 
+body::before,
 body::after {
   position: fixed;
   z-index: 100;
-  inset: -30vmax;
   pointer-events: none;
   content: "";
   visibility: hidden;
   opacity: 0;
+}
+
+body::before {
+  inset: 0;
   background:
-    radial-gradient(circle at center, rgba(255, 255, 255, 0.98) 0 3%, rgba(164, 210, 255, 0.82) 9%, rgba(48, 139, 255, 0.42) 24%, transparent 53%),
-    linear-gradient(112deg, transparent 42%, rgba(220, 239, 255, 0.82) 49%, rgba(93, 166, 255, 0.5) 52%, transparent 59%);
-  mix-blend-mode: screen;
-  transform-origin: center;
+    linear-gradient(135deg, rgba(21, 67, 128, 0.16), rgba(224, 240, 255, 0.46) 48%, rgba(45, 112, 195, 0.16)),
+    rgba(181, 216, 255, 0.08);
+  backdrop-filter: brightness(1.08) saturate(1.06);
+}
+
+body::after {
+  top: -15vh;
+  bottom: -15vh;
+  left: -28vw;
+  width: 20vw;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(151, 202, 255, 0.1) 23%,
+    rgba(235, 247, 255, 0.78) 48%,
+    rgba(255, 255, 255, 0.96) 50%,
+    rgba(133, 192, 255, 0.28) 57%,
+    transparent 100%
+  );
+  filter: blur(12px);
+  transform: skewX(-12deg);
+}
+
+html.transition-flash body::before,
+html.transition-flash body::after {
+  visibility: visible;
+}
+
+html.transition-flash body::before {
+  animation: cinematic-wash 640ms ease-out both;
 }
 
 html.transition-flash body::after {
-  visibility: visible;
-  animation: journey-flash 760ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: cinematic-sweep 720ms cubic-bezier(0.2, 0.75, 0.25, 1) 35ms both;
 }
 
 .site-shell {
@@ -551,21 +580,18 @@ html.transition-flash body::after {
   50% { opacity: 1; }
 }
 
-@keyframes journey-flash {
-  0% {
-    opacity: 0;
-    transform: translate3d(-12%, 7%, 0) scale(0.2) rotate(-8deg);
-  }
-  18% { opacity: 0.82; }
-  38% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(0.76) rotate(-3deg);
-  }
-  68% { opacity: 0.42; }
-  100% {
-    opacity: 0;
-    transform: translate3d(8%, -5%, 0) scale(1.55) rotate(2deg);
-  }
+@keyframes cinematic-wash {
+  0% { opacity: 0; }
+  22% { opacity: 0.5; }
+  48% { opacity: 0.3; }
+  100% { opacity: 0; }
+}
+
+@keyframes cinematic-sweep {
+  0% { opacity: 0; transform: translate3d(0, 0, 0) skewX(-12deg); }
+  18% { opacity: 0; }
+  48% { opacity: 0.72; }
+  100% { opacity: 0; transform: translate3d(155vw, 0, 0) skewX(-12deg); }
 }
 
 @media (max-width: 820px) {
