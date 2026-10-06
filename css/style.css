@@ -33,6 +33,10 @@ html {
   scroll-snap-type: y mandatory;
 }
 
+html.journey-locked {
+  scroll-snap-type: none;
+}
+
 body {
   min-height: 100vh;
   min-height: 100svh;
@@ -67,6 +71,10 @@ body {
   scroll-snap-stop: always;
   transform-origin: center;
   will-change: opacity, filter;
+}
+
+.journey-locked .universe {
+  display: none;
 }
 
 .universe::before {
@@ -243,80 +251,6 @@ body {
     linear-gradient(to bottom, rgba(2, 4, 12, 0.24), transparent 22%, transparent 78%, rgba(2, 4, 12, 0.38)),
     radial-gradient(ellipse at center, transparent 42%, rgba(2, 4, 12, 0.52) 110%);
 }
-
-.journey-gate {
-  position: absolute;
-  z-index: 12;
-  top: 100vh;
-  top: 100svh;
-  right: 0;
-  left: 0;
-  display: flex;
-  height: clamp(130px, 16vw, 190px);
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background:
-    linear-gradient(to bottom, rgba(5, 8, 20, 0.98) 0%, #071020 48%, #071426 100%);
-  box-shadow: 0 -24px 60px rgba(1, 4, 13, 0.5), 0 24px 60px rgba(1, 4, 13, 0.48);
-}
-
-.journey-gate::before,
-.journey-gate::after {
-  position: absolute;
-  top: 50%;
-  width: 44vw;
-  height: 1px;
-  content: "";
-  opacity: 0.5;
-  background: linear-gradient(90deg, transparent, rgba(94, 163, 255, 0.75));
-}
-
-.journey-gate::before { right: 54%; }
-.journey-gate::after { left: 54%; transform: scaleX(-1); }
-
-.gate-line {
-  width: min(29vw, 430px);
-  height: 2px;
-  opacity: 0;
-  background: linear-gradient(90deg, transparent, #5aa3ff);
-  box-shadow: 0 0 15px rgba(52, 139, 255, 0.55);
-  transform: scaleX(0);
-  transition: opacity 700ms ease, transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.gate-line--left { transform-origin: right; }
-.gate-line--right { transform: scaleX(0) rotate(180deg); transform-origin: left; }
-
-.gate-ball {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  width: clamp(68px, 7vw, 92px);
-  aspect-ratio: 1;
-  margin: 0 clamp(20px, 3vw, 42px);
-  place-items: center;
-  border: 3px solid rgba(209, 226, 255, 0.86);
-  border-radius: 50%;
-  opacity: 0;
-  background: linear-gradient(to bottom, #e84a59 0 44%, #172038 44% 56%, #e9effc 56%);
-  box-shadow: 0 0 0 8px rgba(38, 107, 198, 0.08), 0 0 45px rgba(46, 137, 255, 0.28);
-  transform: scale(0.5) rotate(-90deg);
-  transition: opacity 500ms ease, transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.gate-ball i {
-  width: 28%;
-  aspect-ratio: 1;
-  border: 4px solid #172038;
-  border-radius: 50%;
-  background: #f7f9ff;
-  box-shadow: 0 0 0 3px rgba(247, 249, 255, 0.25);
-}
-
-.journey-gate.is-visible .gate-line { opacity: 1; transform: scaleX(1); }
-.journey-gate.is-visible .gate-line--right { transform: scaleX(1) rotate(180deg); }
-.journey-gate.is-visible .gate-ball { opacity: 1; transform: scale(1) rotate(0); }
 
 .trainer-setup {
   position: relative;
@@ -642,10 +576,6 @@ body {
     bottom: 14px;
     max-width: 48vw;
     font-size: 0.58rem;
-  }
-
-  .journey-gate {
-    height: 120px;
   }
 
   .trainer-setup {

@@ -1,7 +1,8 @@
-const revealTargets = document.querySelectorAll(".journey-gate, .trainer-setup");
+const revealTargets = document.querySelectorAll(".trainer-setup");
 const heroSection = document.querySelector(".universe");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 let transitionFrame = 0;
+let journeyLocked = false;
 
 const updatePageTransition = () => {
   const transitionDistance = Math.max(window.innerHeight * 0.72, 1);
@@ -11,6 +12,14 @@ const updatePageTransition = () => {
 
   heroSection.style.setProperty("--hero-opacity", opacity.toFixed(3));
   heroSection.style.setProperty("--hero-blur", `${blur.toFixed(2)}px`);
+
+  if (!journeyLocked && window.scrollY >= heroSection.offsetHeight - 4) {
+    journeyLocked = true;
+    document.documentElement.classList.add("journey-locked");
+    heroSection.setAttribute("aria-hidden", "true");
+    window.scrollTo(0, 0);
+  }
+
   transitionFrame = 0;
 };
 
