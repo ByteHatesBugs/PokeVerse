@@ -1,43 +1,74 @@
 const revealTargets = document.querySelectorAll(".trainer-setup");
 const heroSection = document.querySelector(".universe");
+const trainerSetup = document.querySelector(".trainer-setup");
+const pageRoot = document.documentElement;
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-let transitionFrame = 0;
 let journeyLocked = false;
-let flashTriggered = false;
+let transitionRunning = false;
+let touchStartY = 0;
 
-const updatePageTransition = () => {
-  const transitionDistance = Math.max(window.innerHeight * 0.72, 1);
-  const progress = Math.min(Math.max(window.scrollY / transitionDistance, 0), 1);
-  const opacity = Math.max(1 - progress * 1.12, 0);
-  const blur = reduceMotion.matches ? 0 : progress * 8;
+const startJourneyTransition = () => {
+  if (journeyLocked || transitionRunning) return;
 
-  heroSection.style.setProperty("--hero-opacity", opacity.toFixed(3));
-  heroSection.style.setProperty("--hero-blur", `${blur.toFixed(2)}px`);
+  transitionRunning = true;
+  pageRoot.classList.add("is-transitioning");
+  const coverDelay = reduceMotion.matches ? 0 : 460;
+  const revealDelay = reduceMotion.matches ? 0 : 610;
+  const finishDelay = reduceMotion.matches ? 0 : 1080;
 
-  if (!flashTriggered && window.scrollY > 8) {
-    flashTriggered = true;
-    document.documentElement.classList.add("transition-flash");
-  }
-
-  if (!journeyLocked && window.scrollY >= heroSection.offsetHeight - 4) {
+  window.setTimeout(() => {
     journeyLocked = true;
-    document.documentElement.classList.add("journey-locked");
+    pageRoot.classList.add("journey-locked");
     heroSection.setAttribute("aria-hidden", "true");
+    trainerSetup.classList.add("is-visible");
     window.scrollTo(0, 0);
-  }
+  }, coverDelay);
 
-  transitionFrame = 0;
+  window.setTimeout(() => pageRoot.classList.add("is-revealing"), revealDelay);
+
+  window.setTimeout(() => {
+    pageRoot.classList.remove("is-transitioning", "is-revealing");
+    transitionRunning = false;
+  }, finishDelay);
 };
 
-const requestPageTransition = () => {
-  if (transitionFrame) return;
-  transitionFrame = window.requestAnimationFrame(updatePageTransition);
-};
+window.addEventListener(
+  "wheel",
+  (event) => {
+    if (journeyLocked || event.deltaY <= 0) return;
+    event.preventDefault();
+    startJourneyTransition();
+  },
+  { passive: false },
+);
 
-window.addEventListener("scroll", requestPageTransition, { passive: true });
-window.addEventListener("resize", requestPageTransition);
-reduceMotion.addEventListener("change", requestPageTransition);
-updatePageTransition();
+window.addEventListener("touchstart", (event) => {
+  touchStartY = event.touches[0]?.clientY ?? 0;
+}, { passive: true });
+
+window.addEventListener(
+  "touchmove",
+  (event) => {
+    if (journeyLocked) return;
+    const currentY = event.touches[0]?.clientY ?? touchStartY;
+    if (touchStartY - currentY < 18) return;
+    event.preventDefault();
+    startJourneyTransition();
+  },
+  { passive: false },
+);
+
+window.addEventListener("keydown", (event) => {
+  if (journeyLocked || !["ArrowDown", "PageDown", " ", "End"].includes(event.key)) return;
+  event.preventDefault();
+  startJourneyTransition();
+});
+
+window.addEventListener("scroll", () => {
+  if (journeyLocked || transitionRunning || window.scrollY <= 2) return;
+  window.scrollTo(0, 0);
+  startJourneyTransition();
+}, { passive: true });
 
 const revealObserver = new IntersectionObserver(
   (entries) => {
