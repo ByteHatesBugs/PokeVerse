@@ -41,6 +41,13 @@ html.journey-locked {
   scroll-snap-type: none;
 }
 
+html.journey-locked,
+html.journey-locked body {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
 body {
   min-height: 100vh;
   min-height: 100svh;
@@ -76,6 +83,19 @@ body {
 
 .journey-locked .universe {
   display: none;
+}
+
+.journey-locked .site-shell {
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.journey-locked .trainer-setup {
+  height: 100vh;
+  height: 100svh;
+  min-height: 0;
+  padding-block: clamp(14px, 2.5vh, 28px);
 }
 
 html.is-transitioning,
@@ -441,34 +461,59 @@ html.is-transitioning body {
 .setup-glow--blue { display: none; }
 
 .setup-card {
+  position: relative;
+  isolation: isolate;
   width: min(1080px, 100%);
   padding: clamp(28px, 5vw, 60px);
   border: 1px solid rgba(151, 185, 236, 0.18);
   border-radius: 30px;
+  overflow: hidden;
   opacity: 0;
-  background: linear-gradient(145deg, rgba(16, 28, 55, 0.88), rgba(8, 15, 34, 0.94));
+  background:
+    linear-gradient(135deg, rgba(232, 61, 97, 0.1), transparent 20%),
+    linear-gradient(315deg, rgba(39, 140, 255, 0.1), transparent 22%),
+    linear-gradient(145deg, rgba(16, 28, 55, 0.88), rgba(8, 15, 34, 0.94));
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.38), inset 0 1px rgba(255, 255, 255, 0.055);
   transform: translateY(56px) scale(0.97);
   transition: opacity 850ms ease, transform 950ms cubic-bezier(0.16, 1, 0.3, 1);
   backdrop-filter: blur(18px);
 }
 
+.setup-card::before {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 8%;
+  left: 8%;
+  height: 3px;
+  border-radius: 0 0 999px 999px;
+  content: "";
+  background: linear-gradient(90deg, transparent, #e84a5f 18%, #ffcb24 50%, #398fff 82%, transparent);
+  box-shadow: 0 0 18px rgba(73, 148, 255, 0.28);
+}
+
+.setup-card::after {
+  position: absolute;
+  z-index: 0;
+  right: clamp(-80px, -5vw, -42px);
+  bottom: clamp(-100px, -7vw, -58px);
+  width: clamp(210px, 24vw, 330px);
+  aspect-ratio: 1;
+  content: "";
+  opacity: 0.085;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23b9d3ff' stroke-width='8'%3E%3Ccircle cx='100' cy='100' r='88'/%3E%3Cpath d='M12 100h176'/%3E%3Ccircle cx='100' cy='100' r='29' fill='%230b142b'/%3E%3Ccircle cx='100' cy='100' r='13'/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat;
+  transform: rotate(-12deg);
+}
+
+.setup-card > * {
+  position: relative;
+  z-index: 1;
+}
+
 .trainer-setup.is-visible .setup-card { opacity: 1; transform: translateY(0) scale(1); }
 
 .setup-header { max-width: 720px; margin: 0 auto clamp(34px, 4.5vw, 52px); text-align: center; }
 
-.setup-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  color: #8bbdff;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.mini-ball,
 .button-ball {
   position: relative;
   display: inline-block;
@@ -479,7 +524,6 @@ html.is-transitioning body {
   background: linear-gradient(to bottom, #ed5062 0 43%, currentColor 43% 57%, #f5f8ff 57%);
 }
 
-.mini-ball::after,
 .button-ball::after {
   position: absolute;
   top: 50%;
@@ -758,6 +802,68 @@ html.is-transitioning body {
   @keyframes hero-reveal {
     from { opacity: 0; transform: translate3d(calc(-50% - 20px), 0, 0); }
     to { opacity: 1; transform: translate3d(-50%, 0, 0); }
+  }
+}
+
+@media (max-height: 780px) {
+  .journey-locked .trainer-setup {
+    padding: 12px clamp(12px, 3vw, 28px);
+  }
+
+  .setup-card {
+    padding: 18px clamp(14px, 3vw, 32px);
+  }
+
+  .setup-header {
+    margin-bottom: 18px;
+  }
+
+  .setup-header h2 {
+    margin: 8px 0 6px;
+    font-size: clamp(1.65rem, 5vh, 2.5rem);
+  }
+
+  .setup-header p {
+    font-size: 0.78rem;
+  }
+
+  .trainer-form {
+    gap: 16px;
+  }
+
+  .input-shell input {
+    height: 46px;
+  }
+
+  .avatar-picker legend {
+    margin-bottom: 9px;
+  }
+
+  .avatar-card {
+    padding: 8px 8px 9px;
+  }
+
+  .avatar-portrait {
+    width: min(76px, 100%);
+    margin-bottom: 7px;
+  }
+
+  .avatar-name {
+    font-size: 0.72rem;
+  }
+
+  .avatar-type {
+    font-size: 0.52rem;
+  }
+
+  .journey-button {
+    height: 44px;
+  }
+
+  .trainer-welcome {
+    min-height: 1em;
+    margin-top: -10px;
+    font-size: 0.72rem;
   }
 }
 
